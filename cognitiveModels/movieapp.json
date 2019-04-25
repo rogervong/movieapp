@@ -1,0 +1,489 @@
+{
+  "luis_schema_version": "3.2.0",
+  "versionId": "0.1",
+  "name": "movieapp",
+  "desc": "",
+  "culture": "en-us",
+  "tokenizerVersion": "1.0.0",
+  "intents": [
+    {
+      "name": "MovieTickets.Book",
+      "inherits": {
+        "domain_name": "MovieTickets",
+        "model_name": "Book"
+      }
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [
+    {
+      "name": "MovieTickets.MovieTitle",
+      "inherits": {
+        "domain_name": "MovieTickets",
+        "model_name": "MovieTitle"
+      },
+      "roles": []
+    },
+    {
+      "name": "MovieTickets.PlaceName",
+      "inherits": {
+        "domain_name": "MovieTickets",
+        "model_name": "PlaceName"
+      },
+      "roles": []
+    },
+    {
+      "name": "MovieTickets.PlaceType",
+      "inherits": {
+        "domain_name": "MovieTickets",
+        "model_name": "PlaceType"
+      },
+      "roles": []
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "patternAnyEntities": [],
+  "regex_entities": [],
+  "prebuiltEntities": [
+    {
+      "name": "datetimeV2",
+      "roles": []
+    }
+  ],
+  "model_features": [],
+  "regex_features": [],
+  "patterns": [],
+  "utterances": [
+    {
+      "text": "book 2 tickets to see gone girl at 1 : 30pm today at amc 13 cinema",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 22,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "book a ticket at cinepix",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 17,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "book amc theater pekin tickets",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 5,
+          "endPos": 7
+        },
+        {
+          "entity": "MovieTickets.PlaceType",
+          "startPos": 9,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "book for me amc tickets",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 12,
+          "endPos": 14
+        }
+      ]
+    },
+    {
+      "text": "book me a ticket for jurassic world",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 21,
+          "endPos": 34
+        }
+      ]
+    },
+    {
+      "text": "book movie ticket near my location",
+      "intent": "MovieTickets.Book",
+      "entities": []
+    },
+    {
+      "text": "book tickets for captain america",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 17,
+          "endPos": 31
+        }
+      ]
+    },
+    {
+      "text": "can you find movie tickets",
+      "intent": "MovieTickets.Book",
+      "entities": []
+    },
+    {
+      "text": "can you look up ironman ticket",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 16,
+          "endPos": 22
+        }
+      ]
+    },
+    {
+      "text": "find for me pacific science center imax showing time",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 12,
+          "endPos": 38
+        }
+      ]
+    },
+    {
+      "text": "flagship cinemas waterville maine showtimes",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 0,
+          "endPos": 15
+        }
+      ]
+    },
+    {
+      "text": "get me tickets to see jurassic world",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 22,
+          "endPos": 35
+        }
+      ]
+    },
+    {
+      "text": "get me two tickets for jurassic park",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 23,
+          "endPos": 35
+        }
+      ]
+    },
+    {
+      "text": "get tickets for expendables three",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 16,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "i want 3 tickets for life of pi",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 21,
+          "endPos": 30
+        }
+      ]
+    },
+    {
+      "text": "is argo playing in a theater near by",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 3,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "is jungle book playing in battle creek ?",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 3,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "movie theaters near me playing creed",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 31,
+          "endPos": 35
+        }
+      ]
+    },
+    {
+      "text": "purchase movie tickets",
+      "intent": "MovieTickets.Book",
+      "entities": []
+    },
+    {
+      "text": "show me regal cinemas lima ohio showtimes",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 8,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "show me regal cinemas simi valley showtimes",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 8,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "show me the marquee cinemas new hartford ny showtimes",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 12,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "what ' s on in evesham",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 15,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "what ' s on in warwickshire",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 15,
+          "endPos": 26
+        }
+      ]
+    },
+    {
+      "text": "what ' s on odeon cinema",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 12,
+          "endPos": 23
+        }
+      ]
+    },
+    {
+      "text": "what ' s playing at angelica movie theater",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 20,
+          "endPos": 41
+        }
+      ]
+    },
+    {
+      "text": "what ' s playing at ipic theaters on saturday",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 20,
+          "endPos": 32
+        }
+      ]
+    },
+    {
+      "text": "what ' s the closest theater playing the martian",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 37,
+          "endPos": 47
+        }
+      ]
+    },
+    {
+      "text": "what is playing at cineworld ashford tonight",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 19,
+          "endPos": 27
+        }
+      ]
+    },
+    {
+      "text": "what tickets are still available at cinemark",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 36,
+          "endPos": 43
+        }
+      ]
+    },
+    {
+      "text": "what time is ant - man playing tomorrow",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 13,
+          "endPos": 21
+        }
+      ]
+    },
+    {
+      "text": "what time is gravity playing at regal highlands",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 13,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "what time is x men showing near me",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 13,
+          "endPos": 17
+        }
+      ]
+    },
+    {
+      "text": "when is a good day to die hard playing",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 8,
+          "endPos": 29
+        }
+      ]
+    },
+    {
+      "text": "when is frozen playing",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 8,
+          "endPos": 13
+        }
+      ]
+    },
+    {
+      "text": "when is lucy playing in the cinema in belgium",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 8,
+          "endPos": 11
+        }
+      ]
+    },
+    {
+      "text": "when is suicide squad playing near me",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 8,
+          "endPos": 20
+        }
+      ]
+    },
+    {
+      "text": "when is tomorrowland playing tomorrow",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 8,
+          "endPos": 19
+        }
+      ]
+    },
+    {
+      "text": "where are the marquee cinemas new hartford ny showtimes",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.PlaceName",
+          "startPos": 14,
+          "endPos": 28
+        }
+      ]
+    },
+    {
+      "text": "where is turner the film showing",
+      "intent": "MovieTickets.Book",
+      "entities": [
+        {
+          "entity": "MovieTickets.MovieTitle",
+          "startPos": 9,
+          "endPos": 23
+        }
+      ]
+    }
+  ],
+  "settings": []
+}
