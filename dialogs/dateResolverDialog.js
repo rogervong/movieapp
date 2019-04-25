@@ -1,6 +1,3 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
 const { DateTimePrompt, WaterfallDialog } = require('botbuilder-dialogs');
 const { CancelAndHelpDialog } = require('./cancelAndHelpDialog');
 const { TimexProperty } = require('@microsoft/recognizers-text-data-types-timex-expression');
@@ -24,20 +21,17 @@ class DateResolverDialog extends CancelAndHelpDialog {
         const timex = stepContext.options.date;
 
         const promptMsg = 'On what date would you like to see a the movie?';
-        const repromptMsg = "I'm sorry, for best results, please enter your travel date including the month, day and year.";
+        const repromptMsg = "I'm sorry, for best results, please enter the day you want to see a movie including the month, day and year.";
 
-        if (!timex) {
-            // We were not given any date at all so prompt the user.
+        if (!timex) {           
             return await stepContext.prompt(DATETIME_PROMPT,
                 {
                     prompt: promptMsg,
                     retryPrompt: repromptMsg
                 });
-        } else {
-            // We have a Date we just need to check it is unambiguous.
+        } else {         
             const timexProperty = new TimexProperty(timex);
-            if (!timexProperty.types.has('definite')){
-                // This is essentially a "reprompt" of the data we were given up front.
+            if (!timexProperty.types.has('definite')){                
                 return await stepContext.prompt(DATETIME_PROMPT, { prompt: repromptMsg });
             } else {
                 return await stepContext.next({ timex: timex });
@@ -51,13 +45,8 @@ class DateResolverDialog extends CancelAndHelpDialog {
     }
 
     async dateTimePromptValidator(promptContext) {
-        if (promptContext.recognized.succeeded) {
-            // This value will be a TIMEX. And we are only interested in a Date so grab the first result and drop the Time part.
-            // TIMEX is a format that represents DateTime expressions that include some ambiguity. e.g. missing a Year.
-            const timex = promptContext.recognized.value[0].timex.split('T')[0];
-
-            // If this is a definite Date including year, month and day we are good otherwise reprompt.
-            // A better solution might be to let the user know what part is actually missing.
+        if (promptContext.recognized.succeeded) {                        
+            const timex = promptContext.recognized.value[0].timex.split('T')[0];            
             return new TimexProperty(timex).types.has('definite');
         } else {
             return false;

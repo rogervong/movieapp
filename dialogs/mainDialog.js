@@ -1,3 +1,4 @@
+const { TimexProperty } = require('@microsoft/recognizers-text-data-types-timex-expression');
 const { ComponentDialog, DialogSet, DialogTurnStatus, TextPrompt, WaterfallDialog } = require('botbuilder-dialogs');
 const { MovieDialog } = require('./movieDialog');
 const { LuisHelper } = require('./luisHelper');
@@ -25,7 +26,7 @@ class MainDialog extends ComponentDialog {
 
         this.initialDialogId = MAIN_WATERFALL_DIALOG;
     }
-
+   
     async run(context, accessor) {
         const dialogSet = new DialogSet(accessor);
         dialogSet.add(this);
@@ -43,7 +44,7 @@ class MainDialog extends ComponentDialog {
             return await stepContext.next();
         }
 
-        return await stepContext.prompt('TextPrompt', { prompt: 'What can I help you with today?"' });
+        return await stepContext.prompt('TextPrompt', { prompt: 'Hi I can help you book movie tickets. What can I help you with today?' });
     }
 
     async actStep(stepContext) {
@@ -55,7 +56,7 @@ class MainDialog extends ComponentDialog {
             this.logger.log('LUIS extracted these food details:', movieDetails);
         }
 
-        return await stepContext.beginDialog('movieialog', movieDetails);
+        return await stepContext.beginDialog('movieDialog', movieDetails);
     }
 
     async finalStep(stepContext) {
@@ -63,7 +64,7 @@ class MainDialog extends ComponentDialog {
             const result = stepContext.result;
             const timeProperty = new TimexProperty(result.travelDate);
             const travelDateMsg = timeProperty.toNaturalLanguage(new Date(Date.now()));
-            const msg = `I have you booked to ${ result.movie } from ${ result.theater } on ${ travelDateMsg }.`;
+            const msg = `I have you booked to see ${ result.movie } at ${ result.theater } on ${ result.travelDateMsg }.`;
             await stepContext.context.sendActivity(msg);
         } else {
             await stepContext.context.sendActivity('Thank you.');

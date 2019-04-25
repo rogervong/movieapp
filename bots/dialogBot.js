@@ -2,13 +2,7 @@ const { ActivityHandler, ConversationState, UserState } = require('botbuilder');
 const { Dialog } = require('botbuilder-dialogs');
 
 class DialogBot extends ActivityHandler {
-    /**
-     *
-     * @param {ConversationState} conversationState
-     * @param {UserState} userState
-     * @param {Dialog} dialog
-     * @param {any} logger object for logging events, defaults to console if none is provided
-     */
+
     constructor(conversationState, userState, dialog, logger) {
         super();
         if (!conversationState) throw new Error('[DialogBot]: Missing parameter. conversationState is required');
@@ -26,12 +20,8 @@ class DialogBot extends ActivityHandler {
         this.dialogState = this.conversationState.createProperty('DialogState');
 
         this.onMessage(async context => {
-            this.logger.log('Running dialog with Message Activity.');
-
-            // Run the Dialog with the new message Activity.
-            await this.dialog.run(context, this.dialogState);
-
-            // Save any state changes. The load happened during the execution of the Dialog.
+            this.logger.log('Running dialog with Message Activity.');           
+            await this.dialog.run(context, this.dialogState);            
             await this.conversationState.saveChanges(context, false);
             await this.userState.saveChanges(context, false);
         });

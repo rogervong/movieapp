@@ -1,46 +1,31 @@
-const { ComponentDialog, DialogTurnStatus } = require('botbuilder-dialogs');
+const { ActivityHandler, ConversationState, UserState } = require('botbuilder');
+const { Dialog } = require('botbuilder-dialogs');
 
-/**
- * This base class watches for common phrases like "help" and "cancel" and takes action on them
- * BEFORE they reach the normal bot logic.
- */
-class CancelAndHelpDialog extends ComponentDialog {
-    constructor(id) {
-        super(id);
-    }
+class DialogBot extends ActivityHandler {
 
-    async onBeginDialog(innerDc, options) {
-        const result = await this.interrupt(innerDc);
-        if (result) {
-            return result;
-        }
-        return await super.onBeginDialog(innerDc, options);
-    }
-
-    async onContinueDialog(innerDc) {
-        const result = await this.interrupt(innerDc);
-        if (result) {
-            return result;
-        }
-        return await super.onContinueDialog(innerDc);
-    }
-
-    async interrupt(innerDc) {
-        const text = innerDc.context.activity.text.toLowerCase();
-
-        switch (text) {
-            case 'help':
-            case '?':
-                await innerDc.context.sendActivity('[ This is where to send sample help to the user... ]');
-                return { status: DialogTurnStatus.waiting };
-            case 'cancel':
-            case 'quit':
-                await innerDc.context.sendActivity('Cancelling');
-                return await innerDc.cancelAllDialogs();
+    constructor(conversationState, userState, dialog, logger) {
+        super();
+        if (!conversationState) throw new Error('[DialogBot]: Missing parameter. conversationState is required');
+        if (!userState) throw new Error('[DialogBot]: Missing parameter. userState is required');
+        if (!dialog) throw new Error('[DialogBot]: Missing parameter. dialog is required');
+        if (!logger) {
+            logger = console;
+            logger.log('[DialogBot]: logger not passed in, defaulting to console');
         }
 
-        return;
+        this.conversationState = conversationState;
+        this.userState = userState;
+        this.dialog = dialog;
+        this.logger = logger;
+        this.dialogState = this.conversationState.createProperty('DialogState');
+
+        this.onMessage(async context => {
+            this.logger.log('Running dialog with Message Activity.');           
+            await this.dialog.run(context, this.dialogState);            
+            await this.conversationState.saveChanges(context, false);
+            await this.userState.saveChanges(context, false);
+        });
     }
 }
 
-module.exports.CancelAndHelpDialog = CancelAndHelpDialog;
+module.exports.DialogBot = DialogBot;

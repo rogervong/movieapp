@@ -26,9 +26,6 @@ class MovieDialog extends CancelAndHelpDialog {
         this.initialDialogId = WATERFALL_DIALOG;
     }
 
-    /**
-     * If a destination city has not been provided, prompt for one.
-     */
     async movieStep(stepContext) {
         const movieDetails = stepContext.options;
 
@@ -39,13 +36,9 @@ class MovieDialog extends CancelAndHelpDialog {
         }
     }
 
-    /**
-     * If an origin city has not been provided, prompt for one.
-     */
     async theaterStep(stepContext) {
-        const bookingDetails = stepContext.options;
-
-        // Capture the response to the previous step's prompt
+        const movieDetails = stepContext.options;
+        
         movieDetails.movie = stepContext.result;
         if (!movieDetails.theater) {
             return await stepContext.prompt(TEXT_PROMPT, { prompt: 'What movie theater do you want to go to?' });
@@ -54,14 +47,9 @@ class MovieDialog extends CancelAndHelpDialog {
         }
     }
 
-    /**
-     * If a travel date has not been provided, prompt for one.
-     * This will use the DATE_RESOLVER_DIALOG.
-     */
     async travelDateStep(stepContext) {
         const movieDetails = stepContext.options;
-
-        // Capture the results of the previous step
+        
         movieDetails.theater = stepContext.result;
         if (!movieDetails.travelDate || this.isAmbiguous(movieDetails.travelDate)) {
             return await stepContext.beginDialog(DATE_RESOLVER_DIALOG, { date: movieDetails.travelDate });
@@ -70,23 +58,15 @@ class MovieDialog extends CancelAndHelpDialog {
         }
     }
 
-    /**
-     * Confirm the information the user has provided.
-     */
     async confirmStep(stepContext) {
         const movieDetails = stepContext.options;
-
-        // Capture the results of the previous step
+        
         movieDetails.travelDate = stepContext.result;
         const msg = `Please confirm, I have you watching: ${ movieDetails.destination } At: ${ movieDetails.theater } on: ${ movieDetails.travelDate }.`;
-
-        // Offer a YES/NO prompt.
+        
         return await stepContext.prompt(CONFIRM_PROMPT, { prompt: msg });
     }
 
-    /**
-     * Complete the interaction and end the dialog.
-     */
     async finalStep(stepContext) {
         if (stepContext.result === true) {
             const movieDetails = stepContext.options;

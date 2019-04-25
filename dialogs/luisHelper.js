@@ -1,14 +1,7 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License.
-
 const { LuisRecognizer } = require('botbuilder-ai');
 
 class LuisHelper {
-    /**
-     * Returns an object with preformatted LUIS results for the bot's dialogs to consume.
-     * @param {*} logger
-     * @param {TurnContext} context
-     */
+
     static async executeLuisQuery(logger, context) {
         const movieDetails = {};
 
@@ -29,16 +22,13 @@ class LuisHelper {
                 // We need to get the result from the LUIS JSON which at every level returns an array
 
                 movieDetails.movie= LuisHelper.parseCompositeEntity(recognizerResult, 'MovieTickets.MovieTitle');
-                movieDetails.theater = LuisHelper.parseCompositeEntity(recognizerResult, 'MovieTickets.PlaceName');
-
-                // This value will be a TIMEX. And we are only interested in a Date so grab the first result and drop the Time part.
-                // TIMEX is a format that represents DateTime expressions that include some ambiguity. e.g. missing a Year.
+                movieDetails.theater = LuisHelper.parseCompositeEntity(recognizerResult, 'MovieTickets.PlaceName');                        
                 movieDetails.travelDate = LuisHelper.parseDatetimeEntity(recognizerResult);
             }
         } catch (err) {
             logger.warn(`LUIS Exception: ${ err } Check your LUIS configuration`);
         }
-        return bookingDetails;
+        return movieDetails;
     }
 
     static parseCompositeEntity(result, compositeName, entityName) {
