@@ -62,7 +62,7 @@ class MovieDialog extends CancelAndHelpDialog {
         const movieDetails = stepContext.options;
         
         movieDetails.travelDate = stepContext.result;
-        const msg = `Please confirm, I have you watching: ${ movieDetails.destination } At: ${ movieDetails.theater } on: ${ movieDetails.travelDate }.`;
+        const msg = `Please confirm, I have you watching: ${ movieDetails.movie } At: ${ movieDetails.theater } on: ${ movieDetails.travelDate }.`;
         
         return await stepContext.prompt(CONFIRM_PROMPT, { prompt: msg });
     }
